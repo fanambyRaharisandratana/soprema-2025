@@ -1,0 +1,7 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "../vendor/bootstrap/css/bootstrap-utilities.css";
+@import "../vendor/bootstrap-icons/bootstrap-icons.css";
+@import "../vendor/bootstrap-icons/bootstrap-icons.min.css";
+@import "../vendor/bootstrap-icons/fonts/bootstrap-icons.woff2";
+@import "../vendor/bootstrap-icons/fonts/bootstrap-icons.woff";
+@import "main";
