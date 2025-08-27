@@ -25,6 +25,7 @@ defmodule SopremaWeb.Router do
 
   scope "/", SopremaWeb do
     pipe_through :browser
+    live "/test", TestLive
 
     get "/", PageController, :home
   end
