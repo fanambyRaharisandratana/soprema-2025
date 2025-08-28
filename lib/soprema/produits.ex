@@ -17,12 +17,11 @@ defmodule Soprema.Produits do
     Repo.all(query)
   end
 
-  def find(nom_produit) do
-    query =
-      from p in Photo,
+  def detail(id) do
+    query = from p in Photo,
         join: c in Produit, on: p.idproduit == c.id,
-        where: ilike(c.nom, ^"%#{nom_produit}%"),
         group_by: [c.id, c.nom, c.description, p.idproduit, p.nom],
+        where: c.id == ^id,
         select: %{
           id: c.id,
           idcircuit: p.idproduit,
@@ -30,6 +29,23 @@ defmodule Soprema.Produits do
           photo: p.nom,
           description: c.description
         }
+    Repo.all(query)
+  end
+
+  def find(nom_produit) do
+    query =
+      from p in Photo,
+        join: c in Produit, on: p.idproduit == c.id,
+        where: ilike(c.nom, ^"%#{nom_produit}%"),
+        distinct: c.id,
+        order_by: [c.id, p.id],
+        select: %{
+          id: c.id,
+          idcircuit: p.idproduit,
+          nom: c.nom,
+          photo: p.nom,
+          description: c.description
+      }
 
     Repo.all(query)
   end

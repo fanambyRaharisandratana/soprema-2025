@@ -2,9 +2,10 @@ defmodule SopremaWeb.DetailsLive do
   use Phoenix.LiveView
   # use SopremaWeb, :live_view
   import Phoenix.HTML
+  alias Soprema.Produits
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     content = function_doc()
     {:ok, assign(socket, content: raw(content), active_content: 1)}
   end

@@ -96,7 +96,7 @@
                 <div class="row container">
                 <%= for p <- @produit_var do %>
                     <div class="col-md-3 col-lg-3 mb-4 mb-lg-0 mt-2">
-                    <a href={~p"/details"}>
+                    <a href={~p"/details/#{p.id}"}>
                         <div class="card text-black">
                             <img src={"/" <> p.photo}
                                 class="card-img-top" alt="article" />

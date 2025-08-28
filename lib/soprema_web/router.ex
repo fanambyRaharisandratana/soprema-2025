@@ -32,7 +32,7 @@ defmodule SopremaWeb.Router do
   scope "/", SopremaWeb do
     pipe_through :browser2
 
-    live "/details", DetailsLive
+    live "/details/:id", DetailsLive
     get "/recherche", PageController, :recherche
     get "/produit", PageController, :produit
   end
