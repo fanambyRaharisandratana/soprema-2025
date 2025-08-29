@@ -9,11 +9,52 @@ defmodule SopremaWeb.PageController do
     render(conn, :home, produit_var: p, layout: false)
   end
 
-  def produit(conn, _params) do
+  def contact(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    render(conn, :contact, layout: false)
+  end
+
+  # def produit(conn, _params) do
+  #   # The home page is often custom made,
+  #   # so skip the default app layout.
+  #   p = Produits.list_produit()
+  #   render(conn, :produits, produit_var: p, layout: false)
+  # end
+
+  def produit(conn, %{"page" => page_param}) do
+  # On parse la page depuis les params, par défaut 1 si absent ou invalide
+  page =
+    case Integer.parse(page_param || "1") do
+      {n, _} when n > 0 -> n
+      _ -> 1
+    end
+
+  page_size = 8  # tu peux ajuster le nombre de produits par page
+
+  produits = Produits.list_produit(page, page_size)
+
+  type = Produits.caratype()
+  carac = Produits.cara()
+
+  render(conn, :produits,
+    produit_var: produits,
+    page: page,
+    page_size: page_size,
+    type: type,
+    cara: carac,
+    layout: false
+  )
+end
+
+# version sans paramètre : redirige vers page 1
+def produit(conn, _params), do: produit(conn, %{"page" => "1"})
+
+  def p_cara(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
     p = Produits.list_produit()
-    render(conn, :produits, produit_var: p, layout: false)
+    render(conn, :home, produit_var: p, layout: false)
   end
 
   def recherche(conn, %{"find" => query}) do

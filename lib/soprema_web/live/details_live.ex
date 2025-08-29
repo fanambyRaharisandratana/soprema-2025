@@ -7,7 +7,10 @@ defmodule SopremaWeb.DetailsLive do
   @impl true
   def mount(%{"id" => id}, _session, socket) do
     content = function_doc()
-    {:ok, assign(socket, content: raw(content), active_content: 1)}
+    produit = Produits.detail(id)
+    pr = List.first(produit)
+    car = Produits.caracteristiques(id)
+    {:ok, assign(socket, content: raw(content), produitcar: car, produit: produit, pr: pr, active_content: 1)}
   end
 
   def render(assigns) do
@@ -17,47 +20,41 @@ defmodule SopremaWeb.DetailsLive do
 
           <!-- Colonne gauche : Carousel -->
           <div class="col-md-3">
-            <nav aria-label="breadcrumb">
+            <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center text-uppercase">
                     <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                     <li class="breadcrumb-item"><a href="#">Produits</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Menu</li>
                 </ol>
-            </nav>
+            </nav> -->
             <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
 
                 <!-- Item 1 -->
-                <div class="carousel-item active">
-                  <div class="testimonial-item d-flex align-items-center text-white p-5"
-                    style="background: url('images/p-1.webp') center center / cover no-repeat; height: 300px; position: relative;">
-                    <div style="position: absolute; inset: 0;"></div>
+                <%= for {p, index} <- Enum.with_index(@produit) do %>
+                  <div class={"carousel-item #{if index == 0, do: "active"}"}>
+                    <div class="testimonial-item d-flex align-items-center text-white p-5" style="height: 300px; position: relative;">
+                      <img src={"/" <> p.photo}
+                          alt={"Image du produit #{p.id}"}
+                          class="w-100 h-100 object-cover rounded"
+                          style="object-fit: cover;"/>
+                      <div style="position: absolute; inset: 0;"></div>
+                    </div>
                   </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="carousel-item">
-                  <div class="testimonial-item d-flex align-items-center text-white p-5"
-                    style="background: url('images/p-2.webp') center center / cover no-repeat; height: 300px; position: relative;">
-                    <div style="position: absolute; inset: 0;"></div>
-                  </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="carousel-item">
-                  <div class="testimonial-item d-flex align-items-center text-white p-5"
-                    style="background: url('images/p-3.webp') center center / cover no-repeat; height: 300px; position: relative;">
-                    <div style="position: absolute; inset: 0;"></div>
-                  </div>
-                </div>
+                <% end %>
 
               </div>
 
               <!-- Indicators -->
               <div class="carousel-indicators">
-                <button style="background-color: #0072ce;" type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
-                <button style="background-color: #0072ce;" type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
-                <button style="background-color: #0072ce;" type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                <%= for {p, index} <- Enum.with_index(@produit) do %>
+                  <button type="button"
+                          data-bs-target="#testimonialCarousel"
+                          data-bs-slide-to={index}
+                          class={ if index == 0, do: "active"}
+                          style="background-color: #0072ce;">
+                  </button>
+                <% end %>
               </div>
 
               <!-- Boutons de navigation -->
@@ -77,44 +74,36 @@ defmodule SopremaWeb.DetailsLive do
 
           <!-- Colonne droite : Texte -->
           <div class="col-md-9 justify-content-start">
-            <h2 class="mb-4">Elastovap</h2>
+            <h2 class="mb-4"><%= @pr.nom %></h2>
              <!-- Menu horizontal -->
               <ul class="nav nav-pills d-inline-flex justify-content-start border-bottom mb-2">
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill"
-                    phx-click="to_doc" role="button">
+                    phx-click="to_doc" href="#tab-3" role="button">
                         <div class="ps-3">
                             <h6 class="mt-n1 mb-0">Document</h6>
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a type="button" data-bs-toggle="pill"
-                          class="d-flex align-items-center text-start mx-3 pb-3 border-0 bg-transparent w-100"
-                          phx-click="to_desc">
+                    <a class="d-flex align-items-center text-start mx-3 pb-3 border-0 bg-transparent w-100"
+                        data-bs-toggle="pill" href="#tab-3" phx-click="to_cara" phx-value-id={@pr.id}>
                       <div class="ps-3">
                           <h6 class="mt-n1 mb-0">Caractéristiques</h6>
                       </div>
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" phx-click="to_desc" phx-value-id={@pr.id} data-bs-toggle="pill" href="#tab-3">
+                        <div class="ps-3">
+                            <h6 class="mt-n1 mb-0">Description</h6>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" phx-click="to_ava" phx-value-id={@pr.id} data-bs-toggle="pill" href="#tab-3">
                         <div class="ps-3">
                             <h6 class="mt-n1 mb-0">Avantages</h6>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
-                        <div class="ps-3">
-                            <h6 class="mt-n1 mb-0">Sous-références</h6>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
-                        <div class="ps-3">
-                            <h6 class="mt-n1 mb-0">Produits complémentaires</h6>
                         </div>
                     </a>
                 </li>
@@ -141,6 +130,12 @@ defmodule SopremaWeb.DetailsLive do
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
               Guide d’installation
+              <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
+                Télécharger
+              </a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Catalogue Produits
               <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
                 Télécharger
               </a>
@@ -196,12 +191,42 @@ defmodule SopremaWeb.DetailsLive do
     """
   end
 
-  def function_desc() do
-    """
+  def function_cara(produits) do
+    Enum.map_join(produits, "", fn produit ->
+      """
       <div class="row">
-        <p>description</p>
+        <ul class="list-group">
+          #{Enum.map_join(List.wrap(produit.caracteristique), "", fn carac ->
+          "<li class='list-group-item'>#{carac}</li>"
+          end)}
+        </ul>
       </div>
-    """
+      """
+    end)
+  end
+
+  def function_ava(produits) do
+    Enum.map_join(produits, "", fn produit ->
+      """
+      <div class="row">
+        <ul class="list-group">
+          #{Enum.map_join(List.wrap(produit.avantage), "", fn carac ->
+          "<li class='list-group-item'>#{carac}</li>"
+          end)}
+        </ul>
+      </div>
+      """
+    end)
+  end
+
+  def function_desc(produits) do
+    produit = Produits.detail(produits)
+    pr = List.first(produit)
+      """
+      <div class="container">
+        <p>#{pr.description}</p>
+      </div>
+      """
   end
 
   def handle_event("to_doc", socket) do
@@ -209,8 +234,20 @@ defmodule SopremaWeb.DetailsLive do
     {:noreply, assign(socket, content: raw(second_card_html))}
   end
 
-  def handle_event("to_desc", _params, socket) do
-  second_card_html = function_desc()
+  def handle_event("to_cara", %{"id" => id}, socket) do
+    produit = Produits.caracteristiques(id)
+    second_card_html = function_cara(produit)
+    {:noreply, assign(socket, content: raw(second_card_html))}
+  end
+
+  def handle_event("to_ava", %{"id" => id}, socket) do
+    produit = Produits.avantages(id)
+    second_card_html = function_ava(produit)
+    {:noreply, assign(socket, content: raw(second_card_html))}
+  end
+
+  def handle_event("to_desc", %{"id" => id}, socket) do
+    second_card_html = function_desc(id)
     {:noreply, assign(socket, content: raw(second_card_html))}
   end
 

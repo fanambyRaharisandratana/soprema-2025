@@ -13,4 +13,8 @@ defmodule Soprema.Produit do
     |> cast(attrs, [:nom, :description, :photo])
     |> validate_required([:nom, :description, :photo])
   end
+
+  def count_produit do
+    Repo.aggregate(Produit, :count, :id)
+  end
 end

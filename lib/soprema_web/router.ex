@@ -25,6 +25,9 @@ defmodule SopremaWeb.Router do
 
   scope "/", SopremaWeb do
     pipe_through :browser
+    get "/recherche", PageController, :recherche
+    get "/produit", PageController, :produit
+    get "/contact", PageController, :contact
 
     get "/", PageController, :home
   end
@@ -33,8 +36,6 @@ defmodule SopremaWeb.Router do
     pipe_through :browser2
 
     live "/details/:id", DetailsLive
-    get "/recherche", PageController, :recherche
-    get "/produit", PageController, :produit
   end
 
   # Other scopes may use custom stacks.

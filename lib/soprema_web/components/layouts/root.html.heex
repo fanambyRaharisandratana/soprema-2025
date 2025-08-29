@@ -8,7 +8,7 @@
       {assigns[:page_title]}
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,11 +17,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- for carusel !-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
@@ -49,7 +45,7 @@
                 <div class="navbar-nav mx-auto py-0 pe-4">
                   <a href={~p"/"} class="nav-item nav-link active">Accueil</a>
                   <a href={~p"/produit"} class="nav-item nav-link">Produits</a>
-                  <a href="#" class="nav-item nav-link">Contact</a>
+                  <a href={~p"/contact"} class="nav-item nav-link">Contact</a>
                 </div>
                 <!-- Champ de recherche masqué par défaut -->
                <form id="searchForm" class="d-none me-3" role="search" method="get" action="/recherche">
@@ -128,25 +124,21 @@
     <!-- Footer Start -->
         <div class="container-fluid text-light py-3 mt-1 footer wow fadeIn" data-wow-delay="0.1s" style="color: black;background-color: black;">
             <div class="container">
-                <div class="row g-5">
+                <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal">A propos</h4>
                         <a class="btn btn-link" href="">Notre entreprise</a>
                         <a class="btn btn-link" href="">Nos marques</a>
-                        <a class="btn btn-link" href="">SOPREMA dans le monde</a>
-                        <a class="btn btn-link" href="">Les chiffres clés</a>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal">Informations utiles</h4>
                         <p class="mb-2">Espace presse</p>
                         <p class="mb-2">Rapport DPEF 2025</p>
-                        <p class="mb-2">Liens utiles</p>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal">Outils et ressources</h4>
                         <p class="text-light fw-normal">Nos engagements</p>
                         <p class="text-light fw-normal">Fondation Solar Impulse</p>
-                        <p class="text-light fw-normal">Références chantiers</p>
                     </div>
                 </div>
                 <div class="container">

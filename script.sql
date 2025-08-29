@@ -117,8 +117,8 @@ create table l_produit (
         REFERENCES pdf(id),
 
     CONSTRAINT fk_cara_2
-        FOREIGN key (idproduit)
-        REFERENCES produit(id)
+        FOREIGN key (idcaracteristique)
+        REFERENCES caracteristique(id)
 );
 
 COPY produit(nom, description)

@@ -1,17 +1,16 @@
 
-
         <section class="row mt-2" style="background-color: #fff;">
             <div class="col-md-3 py-1">
                 <div class="container mt-5">
                     <div class="container text-center">
                         <h1 class="mb-3 animated slideInDown">Produits</h1>
-                        <nav aria-label="breadcrumb">
+                        <!-- <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center text-uppercase">
                                 <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                                 <li class="breadcrumb-item"><a href="#">Produits</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Menu</li>
                             </ol>
-                        </nav>
+                        </nav> -->
                     </div>
                 </div>
                 <div class="row container">
@@ -20,21 +19,28 @@
                             <h6 class="section-title ff-secondary text-center text-primary fw-normal">Tous les produits</h6>
                         </div>
                         <div class="accordion" id="faqAccordion" style="color: #fff;">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                                        Categorie
-                                    </button>
-                                </h2>
-                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item"><a href="index.html" class="text-decoration-none">Technologie (606)</a></li>
-                                        </ul>
+                            <%= for {p, index} <- Enum.with_index(@type) do %>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#faq#{index}"} aria-expanded="false" aria-controls={"faq#{index}"}>
+                                                <%= p.nom %>
+                                            </button>
+                                    </h2>
+                                    <div id={"faq#{index}"} class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                <%= for {c, _i} <- Enum.with_index(@cara), c.type == p.nom do %>
+                                                    <li class="list-group-item">
+                                                    <a href="#" class="text-decoration-none"><%= c.nom %></a>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item">
+                            <% end %>
+
+                            <!-- <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
                                             Paroi
@@ -87,12 +93,12 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 py-5">
+            <div class="col-md-9 py-5">
                 <div class="row container">
                 <%= for p <- @produit_var do %>
                     <div class="col-md-3 col-lg-3 mb-4 mb-lg-0 mt-2">
@@ -112,5 +118,25 @@
                 <% end %>
                     
                 </div>
+
+                 <!-- Pagination -->
+                <div class="container mt-4 text-center">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                        <li class={"page-item " <> if @page <= 1, do: "disabled", else: ""}>
+                            <a class="page-link" href={~p"/produit?page=#{@page - 1}"} tabindex="-1"><i class="fas fa-chevron-left text-dark"></i></a>
+                        </li>
+
+                        <li class="page-item active">
+                            <span class="page-link"><%= @page %></span>
+                        </li>
+
+                        <li class={"page-item " <> if length(@produit_var) < @page_size, do: "disabled", else: ""}>
+                            <a class="page-link" href={~p"/produit?page=#{@page + 1}"}><i class="fas fa-chevron-right text-dark"></i></a>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
         </section>        

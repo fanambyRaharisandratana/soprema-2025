@@ -33,9 +33,9 @@
 
               <div class="collapse navbar-collapse text-center" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0 pe-4">
-                  <a href={~p"/"} class="nav-item nav-link active">Accueil</a>
-                  <a href={~p"/produit"} class="nav-item nav-link">Produits</a>
-                  <a href="#" class="nav-item nav-link">Contact</a>
+                  <a href={~p"/"} class="nav-item nav-link">Accueil</a>
+                  <a href={~p"/produit"} class="nav-item active nav-link">Produits</a>
+                  <a href={~p"/contact"} class="nav-item nav-link">Contact</a>
                 </div>
                 <!-- Champ de recherche masqué par défaut -->
                 <form id="searchForm" class="d-none me-3" role="search" method="get" action="/recherche">
@@ -54,37 +54,7 @@
         <div class="section mt-1 bg-white">
             {@inner_content}
         </div>
-        <!-- Footer Start -->
-        <div class="container-fluid text-light py-5 mt-5 footer wow fadeIn" data-wow-delay="0.1s" style="color: black;background-color: black;">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-4 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">A propos</h4>
-                        <a class="btn btn-link" href="">Notre entreprise</a>
-                        <a class="btn btn-link" href="">Nos marques</a>
-                        <a class="btn btn-link" href="">SOPREMA dans le monde</a>
-                        <a class="btn btn-link" href="">Les chiffres clés</a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">Informations utiles</h4>
-                        <p class="mb-2">Espace presse</p>
-                        <p class="mb-2">Rapport DPEF 2025</p>
-                        <p class="mb-2">Liens utiles</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">Outils et ressources</h4>
-                        <p class="text-light fw-normal">Nos engagements</p>
-                        <p class="text-light fw-normal">Fondation Solar Impulse</p>
-                        <p class="text-light fw-normal">Références chantiers</p>
-                    </div>
-                </div>
-                <div class="container">
-                    <p>© SOPREMA MADAGASCAR, 2025
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
+        
 
         <script>
          document.addEventListener("DOMContentLoaded", function() {
@@ -108,6 +78,34 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+
+    <!-- Footer Start -->
+        <div class="container-fluid text-light mt-5 footer wow fadeIn" data-wow-delay="0.1s" style="color: black; bottom: 0; width: 100%; max-height: 10rem;background-color: black;max-height: 10rem;margin-top: 10rem;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">A propos</h4>
+                        <a class="btn btn-link" href="">Notre entreprise</a>
+                        <a class="btn btn-link" href="">Nos marques</a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">Informations utiles</h4>
+                        <p class="mb-2">Espace presse</p>
+                        <p class="mb-2">Rapport DPEF 2025</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal">Outils et ressources</h4>
+                        <p class="text-light fw-normal">Nos engagements</p>
+                        <p class="text-light fw-normal">Fondation Solar Impulse</p>
+                    </div>
+                </div>
+                <div class="container">
+                    <p>© SOPREMA MADAGASCAR, 2025
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
