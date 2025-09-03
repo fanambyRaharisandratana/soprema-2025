@@ -39,66 +39,11 @@
                                     </div>
                                 </div>
                             <% end %>
-
-                            <!-- <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                                            Paroi
-                                        </button>
-                                </h2>
-                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item"><a href="index.html" class="text-decoration-none">Toiture terasse (237)</a></li>
-                                            <li class="list-group-item"><a href="about.html" class="text-decoration-none">Toiture en pente (81)</a></li>
-                                            <li class="list-group-item"><a href="service.html" class="text-decoration-none">Sol (61)</a></li>
-                                            <li class="list-group-item"><a href="menu.html" class="text-decoration-none">Mur façade (57)</a></li>
-                                            <li class="list-group-item"><a href="contact.html" class="text-decoration-none">Parois enterrées (56)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                                            Mode de pose
-                                        </button>
-                                </h2>
-                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                             <li class="list-group-item"><a href="index.html" class="text-decoration-none">Manuel (78)</a></li>
-                                            <li class="list-group-item"><a href="about.html" class="text-decoration-none">Soudable (65)</a></li>
-                                            <li class="list-group-item"><a href="service.html" class="text-decoration-none">En semi-indépendance par fixations mécaniques (28)</a></li>
-                                            <li class="list-group-item"><a href="menu.html" class="text-decoration-none">Fixation auto-adhésive (14)</a></li>
-                                            <li class="list-group-item"><a href="contact.html" class="text-decoration-none">Fixé mécaniques (11)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                                            Matériaux
-                                        </button>
-                                </h2>
-                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item"><a href="index.html" class="text-decoration-none">bitume élastomère sbs (65)</a></li>
-                                            <li class="list-group-item"><a href="about.html" class="text-decoration-none">pvc (46)</a></li>
-                                            <li class="list-group-item"><a href="service.html" class="text-decoration-none">polyuréthane (pu) (42)</a></li>
-                                            <li class="list-group-item"><a href="menu.html" class="text-decoration-none">tpo (24)</a></li>
-                                            <li class="list-group-item"><a href="contact.html" class="text-decoration-none">pmma (22)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 py-5">
+            <div class="col-md-9 py-1">
                 <div class="row container">
                 <%= for p <- @produit_var do %>
                     <div class="col-md-3 col-lg-3 mb-4 mb-lg-0 mt-2">
@@ -119,24 +64,37 @@
                     
                 </div>
 
-                 <!-- Pagination -->
-                <div class="container mt-4 text-center">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                        <li class={"page-item " <> if @page <= 1, do: "disabled", else: ""}>
-                            <a class="page-link" href={~p"/produit?page=#{@page - 1}"} tabindex="-1"><i class="fas fa-chevron-left text-dark"></i></a>
-                        </li>
+                <%= if @page && @total_pages do %>    
+                    <!-- Pagination -->
+                    <div class="container mt-4 text-center">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
 
-                        <li class="page-item active">
-                            <span class="page-link"><%= @page %></span>
-                        </li>
+                                <!-- Bouton précédent -->
+                                <li class={"page-item " <> if @page <= 1, do: "disabled", else: ""}>
+                                    <a class="page-link" href={~p"/produit?page=#{@page - 1}"} tabindex="-1">
+                                        <i class="fas fa-chevron-left text-dark"></i>
+                                    </a>
+                                </li>
 
-                        <li class={"page-item " <> if length(@produit_var) < @page_size, do: "disabled", else: ""}>
-                            <a class="page-link" href={~p"/produit?page=#{@page + 1}"}><i class="fas fa-chevron-right text-dark"></i></a>
-                        </li>
-                        </ul>
-                    </nav>
-                </div>
+                                <!-- Boucles sur toutes les pages -->
+                                <%= for num <- 1..@total_pages do %>
+                                    <li class={"page-item " <> if num == @page, do: "active", else: ""}>
+                                        <a class="page-link" href={~p"/produit?page=#{num}"}><%= num %></a>
+                                    </li>
+                                <% end %>
+
+                                <!-- Bouton suivant -->
+                                <li class={"page-item " <> if @page >= @total_pages, do: "disabled", else: ""}>
+                                    <a class="page-link" href={~p"/produit?page=#{@page + 1}"}>
+                                        <i class="fas fa-chevron-right text-dark"></i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                <% end %>
 
             </div>
         </section>        

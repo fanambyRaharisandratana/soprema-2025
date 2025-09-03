@@ -28,6 +28,7 @@ defmodule SopremaWeb.Router do
     get "/recherche", PageController, :recherche
     get "/produit", PageController, :produit
     get "/contact", PageController, :contact
+    get "/cara/:id", PageController, :liste
 
     get "/", PageController, :home
   end

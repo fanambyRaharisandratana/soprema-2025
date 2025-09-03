@@ -1,16 +1,16 @@
 defmodule SopremaWeb.DetailsLive do
   use Phoenix.LiveView
-  # use SopremaWeb, :live_view
   import Phoenix.HTML
   alias Soprema.Produits
 
   @impl true
   def mount(%{"id" => id}, _session, socket) do
-    content = function_doc()
+    pdf = Produits.list_pdf(id)
+    content = function_doc(pdf)
     produit = Produits.detail(id)
     pr = List.first(produit)
     car = Produits.caracteristiques(id)
-    {:ok, assign(socket, content: raw(content), produitcar: car, produit: produit, pr: pr, active_content: 1)}
+    {:ok, assign(socket, content: raw(content), produit: produit, pr: pr, active_content: 1)}
   end
 
   def render(assigns) do
@@ -79,14 +79,14 @@ defmodule SopremaWeb.DetailsLive do
               <ul class="nav nav-pills d-inline-flex justify-content-start border-bottom mb-2">
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill"
-                    phx-click="to_doc" href="#tab-3" role="button">
+                    phx-click="to_doc" phx-value-id={@pr.id} href="#tab-3" role="button">
                         <div class="ps-3">
                             <h6 class="mt-n1 mb-0">Document</h6>
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="d-flex align-items-center text-start mx-3 pb-3 border-0 bg-transparent w-100"
+                    <a class="d-flex align-items-center text-start mx-3 pb-3"
                         data-bs-toggle="pill" href="#tab-3" phx-click="to_cara" phx-value-id={@pr.id}>
                       <div class="ps-3">
                           <h6 class="mt-n1 mb-0">Caractéristiques</h6>
@@ -107,6 +107,13 @@ defmodule SopremaWeb.DetailsLive do
                         </div>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" phx-click="to_sous" phx-value-id={@pr.id} data-bs-toggle="pill" href="#tab-3">
+                        <div class="ps-3">
+                            <h6 class="mt-n1 mb-0">Sous-références</h6>
+                        </div>
+                    </a>
+                </li>
             </ul>
             <div class="container">
 
@@ -121,74 +128,120 @@ defmodule SopremaWeb.DetailsLive do
     """
   end
 
-  defp function_doc() do
+  defp function_doc(produit) do
     """
     <div class="row">
       <!-- Colonne 1 -->
         <div class="col-md-6">
           <h4 class="mb-3">Fiche technique</h4>
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Guide d’installation
-              <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Catalogue Produits
-              <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
+          #{Enum.map_join(produit, "", fn produit ->
+            if produit.type == "Fiche technique" do
+              parts = String.split(produit.nom, ["\\", "-"])
+              name = Enum.at(parts, 3)
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                TDS - #{name}
+                <a href='#{produit.nom}' class='btn btn-sm btn-primary' download>
+                  <i class='bi bi-download'></i>
+                </a>
+              </li>"
+              else
+                ""  # rien si ce n’est pas une fiche technique
+              end
+          end)}
+
           </ul>
         </div>
 
         <!-- Colonne 2 -->
         <div class="col-md-6">
-          <h4 class="mb-3">Fiche de données de sécurité</h4>
+          <h4 class="mb-3">Installation produit</h4>
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Guide d’installation
-              <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Catalogue Produits
-              <a href="/pdfs/catalogue-produits.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Fiche Technique
-              <a href="/pdfs/fiche-technique.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
+          #{Enum.map_join(produit, "", fn produit ->
+            if produit.type == "Installation produit" do
+              parts = String.split(produit.nom, ["\\", "-"])
+              name = Enum.at(parts, 3)
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                Guide de solution #{name}
+                <a href='#{produit.nom}' class='btn btn-sm btn-primary' download>
+                  <i class='bi bi-download'></i>
+                </a>
+              </li>"
+               else
+                ""  # rien si ce n’est pas une fiche technique
+              end
+            end)}
           </ul>
         </div>
 
         <!-- Colonne 3 -->
         <div class="col-md-6">
-          <h4 class="mb-3">cahier de prescription de pose</h4>
+          <h4 class="mb-3">Donnée de securité</h4>
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Guide d’installation
-              <a href="/pdfs/guide-installation.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Catalogue Produits
-              <a href="/pdfs/catalogue-produits.pdf" class="btn btn-sm btn-primary" download>
-                Télécharger
-              </a>
-            </li>
+          #{Enum.map_join(produit, "", fn produit ->
+            if produit.type == "DonnÃ©e de sÃ©curitÃ©" do
+              parts = String.split(produit.nom, ["\\", "-"])
+              name = Enum.at(parts, 3)
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                SDS - #{name}
+                <a href='#{produit.nom}' class='btn btn-sm btn-primary' download>
+                  <i class='bi bi-download'></i>
+                </a>
+              </li>"
+            else
+                ""  # rien si ce n’est pas une fiche technique
+            end
+          end)}
           </ul>
         </div>
       </div>
     </div>
     """
+  end
+
+  def function_sous(produits) do
+      """
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">codeproduit</th>
+                  <th scope="col">impact carbone</th>
+                  <th scope="col">couleur</th>
+                  <th scope="col">diametre</th>
+                  <th scope="col">épaisseur</th>
+                  <th scope="col">largeur</th>
+                  <th scope="col">longueur</th>
+                  <th scope="col">poids</th>
+                  <th scope="col">volume</th>
+                  <th scope="col">conditionnement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Exemples de lignes : remplace par tes données -->
+                #{Enum.map_join(produits, "", fn pr ->
+                "<tr>
+                  <td>#{pr.codeproduit}</td>
+                  <td>#{pr.impactcarbone}</td>
+                  <td>#{pr.couleur}</td>
+                  <td>#{pr.diametre}</td>
+                  <td>#{pr.epaisseur}</td>
+                  <td>#{pr.largeur}</td>
+                  <td>#{pr.longueur}</td>
+                  <td>#{pr.poids}</td>
+                  <td>#{pr.volume}</td>
+                  <td>#{pr.conditionnement}</td>
+                </tr>"
+                end)}
+                <!-- Fin exemples -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      """
   end
 
   def function_cara(produits) do
@@ -229,8 +282,9 @@ defmodule SopremaWeb.DetailsLive do
       """
   end
 
-  def handle_event("to_doc", socket) do
-  second_card_html = function_doc()
+  def handle_event("to_doc",  %{"id" => id},socket) do
+    produit = Produits.list_pdf(id)
+    second_card_html = function_doc(produit)
     {:noreply, assign(socket, content: raw(second_card_html))}
   end
 
@@ -251,5 +305,10 @@ defmodule SopremaWeb.DetailsLive do
     {:noreply, assign(socket, content: raw(second_card_html))}
   end
 
+  def handle_event("to_sous", %{"id" => id}, socket) do
+    produit = Produits.list_sous(id)
+    second_card_html = function_sous(produit)
+    {:noreply, assign(socket, content: raw(second_card_html))}
+  end
 
 end

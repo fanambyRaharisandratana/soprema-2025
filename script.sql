@@ -40,6 +40,27 @@ create table pdf (
     nom varchar(100) NOT NULL
 );
 
+create table sousreferences (
+    id SERIAL PRIMARY key,
+    idproduit bigint,
+    codeproduit varchar(300),
+    impactcarbone varchar(300),
+    couleur varchar(300),
+    diametre varchar(300),
+    epaisseur varchar(300),
+    largeur varchar(300),
+    longueur varchar(300),
+    poids varchar(300),
+    volume varchar(300),
+    selection varchar(300),
+    Conditionnement varchar(300),
+
+    CONSTRAINT fk_sousproduit
+        FOREIGN key (idproduit)
+        REFERENCES produit(id)
+);
+
+
 create table avantage (
     id SERIAL PRIMARY key,
     nom text NOT NULL
@@ -177,6 +198,12 @@ ENCODING 'LATIN1';
 
 COPY l_sousfamcara(idsousfamille, idcaracteristique)
 FROM '/home/mgbi/dev/elixir/soprema_nmc/csv/l_sousfamcara.csv'
+DELIMITER ';'
+CSV HEADER
+ENCODING 'LATIN1';
+
+COPY sousreferences(idproduit,codeProduit,impactCarbone,Couleur,Diametre,Epaisseur,Largeur,Longueur,Poids,Volume,Selection,Conditionnement)
+FROM '/home/mgbi/dev/elixir/soprema_nmc/csv/sousreferences.csv'
 DELIMITER ';'
 CSV HEADER
 ENCODING 'LATIN1';

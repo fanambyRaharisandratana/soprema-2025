@@ -1,0 +1,86 @@
+idproduit;codeProduit;impactCarbone;Couleur;Diametre;Epaisseur;Largeur;Longueur;Poids;Volume;Selection;Conditionnement
+1;00098555;Non disponible � ce jour;;;;1 m;7 m;;;;
+2;00098550;Non disponible � ce jour;;;;1 m;7 m;;;;
+3;00098549;Non disponible � ce jour;;;;1 m;7 m;;;TRUE;
+4;00098158 NOI;Non disponible � ce jour;Ardois� noir;;;1 m;6 m;;;;
+4;00098158 BLC;Non disponible � ce jour;Blanc acrylique;;;1 m;6 m;;;;
+4;00098158 MAT;Non disponible � ce jour;Brun Matisse;;;1 m;6 m;;;;
+4;00098158 CHB;Non disponible � ce jour;Chagall (Blanc);;;1 m;6 m;;;;
+4;00098158 CHA;Non disponible � ce jour;Chagall (Gris);;;1 m;6 m;;;;
+4;00098158 GRI;Non disponible � ce jour;Gris;;;1 m;6 m;;;;
+4;00098158 VAN;Non disponible � ce jour;Ocre Van Gogh;;;1 m;6 m;;;;
+4; 00098158 GAU;Non disponible � ce jour;Rouge Gauguin;;;1 m;6 m;;;;
+4;00098158 CEZ;Non disponible � ce jour;Sienne c�zanne;;;1 m;6 m;;;;
+4;00098158 VER;Non disponible � ce jour;Vert V�rn�se;;;1 m;6 m;;;;
+5;00100965;Non disponible � ce jour;;;;1 m;6 m;;;;
+6;00100971 NOI;Non disponible � ce jour;Ardois� noir;;;1 m;6 m;;;;
+6;00100971 MAT;Non disponible � ce jour;Brun Matisse;;;1 m;6 m;;;;
+6;00100971 CHB;Non disponible � ce jour;Chagall (Blanc);;;1 m;6 m;;;;
+6;00100971 CHA;Non disponible � ce jour;Chagall (Gris);;;1 m;6 m;;;;
+6;00100971 GRI;Non disponible � ce jour;Gris;;;1 m;6 m;;;;
+6;00100971 VAN;Non disponible � ce jour;Ocre Van Gogh;;;1 m;6 m;;;;
+6;00100971 GAU;Non disponible � ce jour;Rouge Gauguin;;;1 m;6 m;;;;
+6;00100971 CEZ;Non disponible � ce jour;Sienne c�zanne;;;1 m;6 m;;;;
+6;00100971 VER;Non disponible � ce jour;Vert V�rn�se;;;1 m;6 m;;;;
+7;00033948;Non disponible � ce jour;;;;0.25 m;10 m;;;;
+7;00011095;Non disponible � ce jour;;;;0.33 m;10 m;;;;
+7;00097143;Non disponible � ce jour;;;;0.5 m;10 m;;;;
+8;00033853;Non disponible � ce jour;;;1.5 m;1 m;10 m;;;;
+8;00031600;Non disponible � ce jour;;;1.5 m;1 m;20 m;;;;
+9;00033856 MAT;Non disponible � ce jour;Brun Matisse;;;1 m;10 m;;;;
+9;00033856 CHA;Non disponible � ce jour;Chagall (Gris);;;1 m;10 m;;;;
+9;00033856 GAU;Non disponible � ce jour;Rouge Gauguin;;;1 m;10 m;;;;
+9;00033856 CEZ;Non disponible � ce jour;Sienne c�zanne;;;1 m;10 m;;;;
+9;00033856 VER;Non disponible � ce jour;Vert V�rn�se;;;1 m;10 m;;;;
+10;;;;;;;;;;;
+11;00114558 GRI;Non disponible � ce jour;Gris;;;1 m;5 m;;;;
+12;00097846 CHA;Non disponible � ce jour;Chagall (Gris);;;1 m;8 m;;;;
+13;00031552;Non disponible � ce jour;;;4.2 m;45 m;10 m;;;;
+14;00033946;Non disponible � ce jour;;;;;;25 kg;;;Seau
+15;00011053;Non disponible � ce jour;;;;;;5 kg;;;Seau
+15;00030930;Non disponible � ce jour;;;;;;25 kg;;;Seau
+16;00052912;Non disponible � ce jour;;;;;;;5 l;;Seau
+16;00033925;Non disponible � ce jour;;;;;;;25 l;;Seau
+17;00030966;Non disponible � ce jour;;;;;;;5 l;;Bidon
+17;00030931;Non disponible � ce jour;;;;;;;30 l;;Bidon
+18;00033933;Non disponible � ce jour;;;;;;;1 l;;Bidon
+18;00031008;Non disponible � ce jour;;;;;;;5 l;;Seau
+18;00031033;Non disponible � ce jour;;;;;;;30 l;;Seau
+19;00033953;Non disponible � ce jour;;;;1.1 m;45.45 m;;;;
+20;00033972;Non disponible � ce jour;;;;1 m;100 m;;;;
+21;00101014;Non disponible � ce jour;;;;1.1 m;25 m;;;;
+21;00101013;Non disponible � ce jour;;;;2.2 m;90 m;;;;
+22;00011409;Non disponible � ce jour;;;;1 m;20 m;;;;
+22;00011410;Non disponible � ce jour;;;;1.5 m;20 m;;;;
+22;00011411;Non disponible � ce jour;;;;2 m;20 m;;;;
+22;00011412;Non disponible � ce jour;;;;2.5 m;20 m;;;;
+22;00011413;Non disponible � ce jour;;;;3 m;20 m;;;;
+22;00011414;Non disponible � ce jour;;;;4 m;20 m;;;;
+23;00156188;Non disponible � ce jour;;;;;;25 kg;;;Sac
+24;00156187;Non disponible � ce jour;;;;;;25 kg;;;Sac
+25;00031534;Non disponible � ce jour;;;;;;5 kg;;;Bidon
+25;00031607;Non disponible � ce jour;;;;;;20 kg;;;Bidon
+26;00031580;Non disponible � ce jour;;;;;;5 kg;;;Bidon
+26;00031749;Non disponible � ce jour;;;;;;20 kg;;;Bidon
+27;00033983 RAL1001;Non disponible � ce jour;;;;;;5 kg;;;Seau
+27;00033983 RAL1015;Non disponible � ce jour;;;;;;5 kg;;;Seau
+27;00033983 RAL7032;Non disponible � ce jour;;;;;;5 kg;;;Seau
+27;00033983 RAL7040;Non disponible � ce jour;;;;;;5 kg;;;Seau
+27;00011493 RAL1001;Non disponible � ce jour;;;;;;25 kg;;;Seau
+27;00011493 RAL1015;Non disponible � ce jour;;;;;;25 kg;;;Seau
+27;00011493 RAL7032;Non disponible � ce jour;;;;;;25 kg;;;Seau
+27;00011493 RAL7040;Non disponible � ce jour;;;;;;25 kg;;;Seau
+28;00011623;Non disponible � ce jour;;;;;;5 kg;;;Sachet
+28;00031447;Non disponible � ce jour;;;;;;5 kg;;;Seau
+28;00011590;Non disponible � ce jour;;;;;;15 KG;;;Seau
+29;00100815;Non disponible � ce jour;;;;;;5 kg;;;Sachet
+29;00033992;Non disponible � ce jour;;;;;;5 kg;;;Seau
+29;00033990;Non disponible � ce jour;;;;;;15 kg;;;Seau
+30;00011566;Non disponible � ce jour;;;;0.1 m;10 m;;;;
+30;00011624;Non disponible � ce jour;;;;0.15 m;10 m;;;;
+30;00011572;Non disponible � ce jour;;;;0.1 m;50 m;;;;
+30;00011625;Non disponible � ce jour;;;;0.15 m;50 m;;;;
+30;00102992;Non disponible � ce jour;;;;0.2 m;50 m;;;;
+31;00011738;Non disponible � ce jour;Gris;80 mm;;;;;;;
+31;00011739;Non disponible � ce jour;Gris;110 mm;;;;;;;
+32;00101981;Non disponible � ce jour;;;;;400 mm;;;;
