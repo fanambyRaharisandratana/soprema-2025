@@ -15,13 +15,6 @@ defmodule SopremaWeb.PageController do
     render(conn, :contact, layout: false)
   end
 
-  # def produit(conn, _params) do
-  #   # The home page is often custom made,
-  #   # so skip the default app layout.
-  #   p = Produits.list_produit()
-  #   render(conn, :produits, produit_var: p, layout: false)
-  # end
-
   def produit(conn, %{"page" => page_param}) do
     # On parse la page depuis les params, par défaut 1 si absent ou invalide
     page =
@@ -58,10 +51,17 @@ def produit(conn, _params), do: produit(conn, %{"page" => "1"})
     render(conn, :home, produit_var: p, layout: false)
   end
 
+  def liste(conn,  %{"id" => id}) do
+    page = nil
+    p = Produits.p_cara(id)
+    type = Produits.caratype()
+    carac = Produits.cara()
+    render(conn, :produits,  page: page, type: type,  cara: carac, produit_var: p, layout: false)
+  end
+
   def recherche(conn, %{"find" => query}) do
     page = nil
     p = Produits.find(query)
-    IO.inspect(p, label: "Résultats de la recherche")
     type = Produits.caratype()
     carac = Produits.cara()
 

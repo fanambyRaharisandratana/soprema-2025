@@ -15,7 +15,7 @@ defmodule SopremaWeb.DetailsLive do
 
   def render(assigns) do
     ~H"""
-    <div class="container mb-5 mt-5">
+    <div class="mb-5 mt-0 mt-md-5">
         <div class="row">
 
           <!-- Colonne gauche : Carousel -->
@@ -96,7 +96,7 @@ defmodule SopremaWeb.DetailsLive do
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" phx-click="to_desc" phx-value-id={@pr.id} data-bs-toggle="pill" href="#tab-3">
                         <div class="ps-3">
-                            <h6 class="mt-n1 mb-0">Description</h6>
+                            <h6 class="mt-n1 mb-0">Déscription</h6>
                         </div>
                     </a>
                 </li>
@@ -112,6 +112,13 @@ defmodule SopremaWeb.DetailsLive do
                         <div class="ps-3">
                             <h6 class="mt-n1 mb-0">Sous-références</h6>
                         </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" phx-click="to_pcomp" phx-value-id={@pr.id} data-bs-toggle="pill" href="#tab-3">
+                      <div class="ps-3">
+                          <h6 class="mt-n1 mb-0">Produits complémentaires</h6>
+                      </div>
                     </a>
                 </li>
             </ul>
@@ -244,6 +251,30 @@ defmodule SopremaWeb.DetailsLive do
       """
   end
 
+  def function_comp(produits) do
+    """
+      <div class="row">
+          <h5>produits complementaires</h5>
+          #{Enum.map_join(produits, "", fn pr ->
+          "<div class='col-md-3 col-lg-3 mb-4 mb-lg-0 mt-2'>
+                    <a href='/details/#{pr.idproduit}'>
+                        <div class='card text-black'>
+                            <img src='/#{pr.photo}'
+                                class='card-img-top' alt='article' />
+                            <div class='card-body'>
+                                <div class='text-center mt-1'>
+                                    <h6 class='card-title'>#{pr.nom}</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+          </div>"
+          end)}
+      </div>
+    """
+  end
+
   def function_cara(produits) do
     Enum.map_join(produits, "", fn produit ->
       """
@@ -308,6 +339,12 @@ defmodule SopremaWeb.DetailsLive do
   def handle_event("to_sous", %{"id" => id}, socket) do
     produit = Produits.list_sous(id)
     second_card_html = function_sous(produit)
+    {:noreply, assign(socket, content: raw(second_card_html))}
+  end
+
+  def handle_event("to_pcomp", %{"id" => id}, socket) do
+    produit = Produits.produitcomp(id)
+    second_card_html = function_comp(produit)
     {:noreply, assign(socket, content: raw(second_card_html))}
   end
 

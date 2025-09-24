@@ -1,5 +1,5 @@
 
-        <section class="row mt-2" style="background-color: #fff;">
+        <section class="row mt-0 mt-md-5" style="background-color: #fff;">
             <div class="col-md-3 py-1">
                 <div class="container mt-5">
                     <div class="container text-center">
@@ -23,15 +23,15 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#faq#{index}"} aria-expanded="false" aria-controls={"faq#{index}"}>
-                                                <%= p.nom %>
-                                            </button>
+                                            <%= p.nom %>
+                                        </button>
                                     </h2>
                                     <div id={"faq#{index}"} class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                         <div class="accordion-body">
                                             <ul class="list-group">
                                                 <%= for {c, _i} <- Enum.with_index(@cara), c.type == p.nom do %>
                                                     <li class="list-group-item">
-                                                    <a href="#" class="text-decoration-none"><%= c.nom %></a>
+                                                    <a href={~p"/cara/#{c.id}"} class="text-decoration-none"><%= c.nom %></a>
                                                     </li>
                                                 <% end %>
                                             </ul>
@@ -47,18 +47,18 @@
                 <div class="row container">
                 <%= for p <- @produit_var do %>
                     <div class="col-md-3 col-lg-3 mb-4 mb-lg-0 mt-2">
-                    <a href={~p"/details/#{p.id}"}>
-                        <div class="card text-black">
-                            <img src={"/" <> p.photo}
-                                class="card-img-top" alt="article" />
-                            <div class="card-body">
-                                <div class="text-center mt-1">
-                                    <h6 class="card-title"><%= p.nom %></h6>
-                                </div>
+                        <a href={~p"/details/#{p.id}"}>
+                            <div class="card text-black">
+                                <img src={"/" <> p.photo} style="height: 15rem;"
+                                    class="card-img-top" alt="article" />
+                                <div class="card-body">
+                                    <div class="text-center mt-1">
+                                        <h6 class="card-title"><%= p.nom %></h6>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                     </div>
                 <% end %>
                     

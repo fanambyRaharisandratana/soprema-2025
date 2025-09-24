@@ -3,6 +3,7 @@ defmodule Soprema.Produit do
   import Ecto.Changeset
 
   schema "produit" do
+    field :idproduit, :integer
     field :nom, :string
     field :description, :string
     field :photo, :string
@@ -10,8 +11,8 @@ defmodule Soprema.Produit do
 
   def changeset(produit, attrs) do
     produit
-    |> cast(attrs, [:nom, :description, :photo])
-    |> validate_required([:nom, :description, :photo])
+    |> cast(attrs, [:idproduit ,:nom, :description, :photo])
+    |> validate_required([:idproduit ,:nom, :description, :photo])
   end
 
   def count_produit do

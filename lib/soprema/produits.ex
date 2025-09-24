@@ -6,26 +6,9 @@ defmodule Soprema.Produits do
   alias Soprema.Avantage
   alias Soprema.Pdf
   alias Soprema.Sousreference
+  alias Soprema.ProduitComplementaire
   import Ecto.Query
 
-#   def list_produit(page \\ 1, page_size \\ 8) do
-#   query =
-#     from p0 in Soprema.Photo,
-#       join: p1 in Soprema.Produit, on: p0.idproduit == p1.id,
-#       select: %{
-#         id: p1.id,
-#         idproduit: p0.idproduit,
-#         nom: p1.nom,
-#         photo: fragment("MIN(?)", p0.nom),
-#         description: p1.description
-#       },
-#       group_by: [p1.id, p1.nom, p1.description, p0.idproduit],
-#       order_by: [asc: p1.id],
-#       limit: ^page_size,
-#       offset: ^((page - 1) * page_size)
-
-#   Repo.all(query)
-# end
 
   def list_produit(page \\ 1, page_size \\ 8) do
     # Requête pour compter le total
@@ -180,6 +163,20 @@ defmodule Soprema.Produits do
     Repo.all(query)
   end
 
+  def produitcomp(id) do
+    query = from p1 in ProduitComplementaire,
+        join: p2 in Produit, on: p2.id == p1.idproduitcomp,
+        join: p3 in Photo, on: p3.idproduit == p1.idproduitcomp,
+        group_by: [p2.id, p1.idproduitcomp, p2.nom],
+        where: p1.idproduit == ^id,
+        select: %{
+          idproduit: p1.idproduitcomp,
+          nom: p2.nom,
+          photo: min(p3.nom)
+        }
+    Repo.all(query)
+  end
+
   def caracteristiques(id) do
     query = from l in L_produit,
         join: p in Produit, on: l.idproduit == p.id,
@@ -202,7 +199,7 @@ defmodule Soprema.Produits do
         where: c.id == ^id,
         select: %{
           id: p.id,
-          nom: c.nom,
+          nom: p.nom,
           description: p.description,
           caracteristique: c.nom,
           photo: ph.nom
