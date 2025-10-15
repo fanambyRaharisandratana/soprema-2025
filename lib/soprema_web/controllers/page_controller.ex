@@ -9,6 +9,13 @@ defmodule SopremaWeb.PageController do
     render(conn, :home, produit_var: p, layout: false)
   end
 
+  def client(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    p = Produits.list_produit()
+    render(conn, :client, produit_var: p, layout: false)
+  end
+
   def contact(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
